@@ -1,0 +1,1714 @@
+/* ========== Сброс и базовая типографика ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 400;
+  color: #1a1a1a;
+  background: #f5f5f5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ========== Боковая панель (Sidebar) ========== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+  background: #2c2160;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar__logo {
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 20px 16px 16px;
+  letter-spacing: 0.3px;
+  user-select: none;
+}
+
+.sidebar__logo--accent {
+  color: #f0883a;
+}
+
+.sidebar__divider {
+  border: none;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.2);
+  margin: 0 16px 12px;
+}
+
+.sidebar__nav {
+  flex: 1 0 auto;
+  padding: 0 0 16px;
+}
+
+.nav-group {
+  margin-bottom: 16px;
+}
+
+.nav-group__title {
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 0 16px 6px;
+  letter-spacing: 0.5px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  border-right: 2px solid transparent;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav-item__icon {
+  font-size: 14px;
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.nav-item__text {
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-item--active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border-right: 2px solid #f0883a;
+}
+
+.nav-item--active:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar__footer {
+  margin-top: auto;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f0883a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+#sidebarAvatar i {
+    font-size: 20px;
+    color: #fff;
+}
+
+.avatar-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.avatar-option {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: #2C2160;
+    background: #f0f0f0;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    user-select: none;
+}
+
+.avatar-option:hover {
+    background: #e0e0e0;
+}
+
+.avatar-option--selected {
+    border-color: #F0883A;
+    background: #fff;
+}
+
+.sidebar__username {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+}
+
+.sidebar__logout {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  font-weight: 400;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  transition: opacity 0.15s ease;
+  align-self: flex-start;
+}
+
+.sidebar__logout:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+/* ========== Основная область ========== */
+.main-area {
+  margin-left: 200px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== Верхняя панель (Topbar) ========== */
+.topbar {
+  height: 60px;
+  background: #ffffff;
+  border-bottom: 0.5px solid #e0e0e0;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbar__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.topbar__title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+  line-height: 1.3;
+}
+.topbar__subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  color: #888;
+  line-height: 1.3;
+}
+
+.topbar__action {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #ffffff;
+  background: #f0883a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.topbar__action:hover {
+  background: #d9742e;
+}
+.topbar__action:active {
+  background: #c06524;
+}
+
+/* ========== Контентная область ========== */
+.content {
+  flex: 1;
+  background: #ffffff;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: opacity 0.2s ease;
+}
+
+/* ========== Дашборд: общие стили карточек ========== */
+.dashboard-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.dashboard-card__title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+/* ========== Строка метрик ========== */
+.metrics-row {
+  display: flex;
+  gap: 12px;
+}
+
+.metric-card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-card__label {
+  font-size: 11px;
+  font-weight: 400;
+  color: #888;
+}
+.metric-card__value {
+  font-size: 22px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+.metric-card__hint {
+  font-size: 11px;
+  font-weight: 400;
+}
+.metric-card__hint--positive {
+  color: #7dbf2e;
+}
+.metric-card__hint--negative {
+  color: #f0883a;
+}
+.metric-card__hint--neutral {
+  color: #888;
+}
+
+/* ========== Две колонки: тепловая карта + фокус по сегментам ========== */
+.dashboard-row {
+  display: flex;
+  gap: 12px;
+}
+.dashboard-row__left {
+  flex: 3;
+}
+.dashboard-row__right {
+  flex: 2;
+}
+
+/* Табы в тепловой карте */
+.segment-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.segment-tab {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: inherit;
+  color: #555;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.segment-tab--active {
+  background: #2c2160;
+  color: #ffffff;
+}
+
+/* Прямоугольник тепловой карты */
+.heatmap-preview {
+  width: 100%;
+  height: 400px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.heatmap-blur {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(107, 88, 190, 0.7) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(240, 136, 58, 0.6) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 70%,
+      rgba(180, 100, 220, 0.5) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(240, 150, 80, 0.5) 0%,
+      transparent 50%
+    );
+  filter: blur(20px);
+}
+
+/* Легенда */
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #888;
+  margin-top: 12px;
+}
+.legend-gradient {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #6b58be, #f0883a);
+}
+
+/* Фокус по сегментам */
+.segment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.segment-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.segment-item__name {
+  width: 60px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #1a1a1a;
+  flex-shrink: 0;
+}
+.segment-item__bar-wrapper {
+  flex: 1;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.segment-item__bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.segment-item__bar--green { 
+    background: #7DBF2E; 
+}
+.segment-item__bar--purple-light { 
+    background: #8A6BBE; 
+}
+.segment-item__bar--purple { 
+    background: #6B58BE; 
+}
+.segment-item__bar--purple-dark { 
+    background: #4E3A9C; 
+}
+.segment-item__bar--orange { 
+    background: #F0883A; 
+}
+
+.segment-item__value {
+  width: 40px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #1a1a1a;
+  text-align: right;
+}
+
+/* ========== Активные кампании ========== */
+.campaign-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.campaign-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 0.5px solid #e0e0e0;
+}
+
+.campaign-item:last-child {
+  border-bottom: none;
+}
+
+.campaign-item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.campaign-item__name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+.campaign-item__meta {
+  font-size: 11px;
+  font-weight: 400;
+  color: #888;
+}
+.campaign-item__sessions {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-right: 12px;
+}
+
+.campaign-item__status {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.campaign-item__status--active {
+  background: #e6f4e6;
+  color: #2d6a2d;
+}
+.campaign-item__status--ended {
+  background: #f0edf7;
+  color: #6b58be;
+}
+
+/* ========== Топ элементов ========== */
+.top-elements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.top-element-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.top-element-item__number {
+  width: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #888;
+  flex-shrink: 0;
+}
+.top-element-item__name {
+  width: 140px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #1a1a1a;
+  flex-shrink: 0;
+}
+.top-element-item__bar-wrapper {
+  flex: 1;
+  height: 6px;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.top-element-item__bar {
+  height: 100%;
+  border-radius: 3px;
+  background: #f0883a;
+}
+.top-element-item__percent {
+  width: 36px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #888;
+  text-align: right;
+}
+
+/* ========== СКЕЛЕТОНЫ ========== */
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.skeleton {
+  background: #e0e0e0;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton--metric {
+  height: 80px;
+  flex: 1;
+  border-radius: 12px;
+}
+.skeleton--heatmap {
+  width: 100%;
+  height: 400px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.skeleton--segment-item {
+  height: 8px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+.skeleton--campaign-item {
+  height: 40px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+.skeleton--top-element-item {
+  height: 6px;
+  border-radius: 3px;
+  margin-bottom: 18px;
+}
+.skeleton--legend {
+  height: 8px;
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 12px;
+}
+
+/* Пустое состояние тепловой карты (дашборд) */
+.heatmap-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  text-align: center;
+  color: #6b58be;
+}
+
+.heatmap-empty__icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+.heatmap-empty__title {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.heatmap-empty__desc {
+  font-size: 13px;
+  color: #888;
+  font-weight: 400;
+}
+
+/* ========== СТРАНИЦА САЙТОВ ========== */
+.sites-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+  flex: 1;
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+.sites-empty__icon {
+  font-size: 48px;
+  color: #6b58be;
+  margin-bottom: 16px;
+}
+.sites-empty__title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+.sites-empty__subtitle {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 24px;
+}
+.btn-add-site {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: #f0883a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-add-site:hover {
+  background: #d9742e;
+}
+
+/* Сетка карточек сайтов */
+.sites-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.site-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.site-card__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+.site-card__icon {
+  font-size: 18px;
+}
+.site-card__meta {
+  font-size: 12px;
+  color: #888;
+}
+.site-card__stats {
+  font-size: 13px;
+  color: #1a1a1a;
+  margin-top: 4px;
+}
+.site-card__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.site-card__btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  color: #1a1a1a;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.site-card__btn:hover {
+  background: #f9fafb;
+  border-color: #a0a0a0;
+}
+.site-card__btn--primary {
+  background: #f0883a;
+  color: #fff;
+  border-color: #f0883a;
+}
+.site-card__btn--primary:hover {
+  background: #d9742e;
+  border-color: #d9742e;
+}
+
+/* ========== МОДАЛЬНОЕ ОКНО ========== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay--visible {
+  opacity: 1;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 480px;
+  max-width: 90vw;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.modal--visible {
+  transform: scale(1);
+}
+
+.modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal__title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.modal__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.modal__input {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+}
+
+.modal__input:focus {
+  border-color: #f0883a;
+  box-shadow: 0 0 0 2px rgba(240, 136, 58, 0.2);
+}
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.modal__btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.modal__btn--primary {
+  background: #f0883a;
+  color: #fff;
+}
+.modal__btn--primary:hover {
+  background: #d9742e;
+}
+.modal__btn--secondary {
+  background: #f0f0f0;
+  color: #1a1a1a;
+}
+.modal__btn--secondary:hover {
+  background: #e0e0e0;
+}
+.modal__btn--danger {
+  background: #e53e3e;
+  color: #fff;
+}
+.modal__btn--danger:hover {
+  background: #c53030;
+}
+
+.code-snippet {
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  overflow-x: auto;
+  white-space: nowrap;
+  color: #1a1a1a;
+}
+
+/* ========== СТРАНИЦА ТЕПЛОВОЙ КАРТЫ (#heatmap) ========== */
+.heatmap-page-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+
+.heatmap-page-filters select {
+  padding: 8px 12px;
+  font-size: 13px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  font-family: inherit;
+  min-width: 150px;
+}
+
+.btn-apply-filters {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: #f0883a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  height: fit-content;
+}
+.btn-apply-filters:hover {
+  background: #d9742e;
+}
+
+.compare-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  user-select: none;
+}
+
+.compare-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.heatmap-canvas-container {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.heatmap-canvas {
+  background: #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  flex: 1;
+  height: 500px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heatmap-mock-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  opacity: 0.4;
+}
+
+.heatmap-mock-block {
+  background: #d0d0d0;
+  border-radius: 4px;
+  height: 18px;
+  width: 60%;
+}
+.heatmap-mock-block--short {
+  width: 40%;
+}
+.heatmap-mock-block--long {
+  width: 80%;
+}
+
+.heatmap-spots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(107, 88, 190, 0.7) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 50%,
+      rgba(240, 136, 58, 0.6) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 70%,
+      rgba(180, 100, 220, 0.5) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 60% 20%,
+      rgba(240, 150, 80, 0.5) 0%,
+      transparent 50%
+    );
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.heatmap-segment-label {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 6px;
+  color: #1a1a1a;
+}
+.heatmap-compare-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.heatmap-compare-row {
+  display: flex;
+  gap: 12px;
+}
+.heatmap-compare-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ========== СТРАНИЦА СЕГМЕНТОВ (#segments) ========== */
+.segments-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.segments-tab {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #555;
+  font-family: inherit;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.segments-tab--active {
+  background: #2c2160;
+  color: #ffffff;
+}
+
+/* Таблица сегментов */
+.segments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 32px;
+  font-size: 14px;
+}
+
+.segments-table th {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 0.5px solid #e0e0e0;
+  font-size: 12px;
+  color: #888;
+  font-weight: 500;
+}
+
+.segments-table td {
+  padding: 10px 12px;
+  border-bottom: 0.5px solid #e0e0e0;
+}
+
+.segments-table tr.clickable-row {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.segments-table tr.clickable-row:hover {
+  background: #f9fafb;
+}
+
+/* График сравнения (бары) */
+.segment-bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.segment-bar-label {
+  width: 100px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+.segment-bar-track {
+  flex: 1;
+  height: 10px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 12px;
+}
+.segment-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+
+.segment-bar-fill--green {
+    background: #7DBF2E; 
+}
+.segment-bar-fill--purple-light {
+    background: #8A6BBE; 
+}
+.segment-bar-fill--purple {
+    background: #6B58BE; 
+}
+.segment-bar-fill--purple-dark {
+    background: #4E3A9C; 
+}
+.segment-bar-fill--orange { 
+    background: #F0883A; 
+}
+
+.segment-bar-value {
+  width: 50px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+/* ========== СТРАНИЦА ЭКСПОРТА (#export) ========== */
+.export-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.export-form select {
+  padding: 8px 12px;
+  font-size: 13px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  font-family: inherit;
+  min-width: 150px;
+}
+
+.btn-download {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: #f0883a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-download:hover {
+  background: #d9742e;
+}
+
+.export-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.export-history-table th {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 0.5px solid #e0e0e0;
+  font-size: 12px;
+  color: #888;
+  font-weight: 500;
+}
+
+.export-history-table td {
+  padding: 10px 12px;
+  border-bottom: 0.5px solid #e0e0e0;
+  font-size: 14px;
+}
+
+.export-history-table .btn-download-icon {
+  background: none;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.15s ease;
+}
+
+.export-history-table .btn-download-icon:hover {
+  background: #f9fafb;
+}
+
+/* ========== СТРАНИЦА НАСТРОЕК (#settings) ========== */
+.settings-section {
+  margin-bottom: 28px;
+}
+
+.settings-section__title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  color: #1a1a1a;
+}
+
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.settings-field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.settings-field input {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+  background: #fff;
+}
+
+.settings-field input:focus {
+  border-color: #f0883a;
+  box-shadow: 0 0 0 2px rgba(240, 136, 58, 0.2);
+}
+.settings-field input[readonly] {
+  background: #f9fafb;
+  color: #888;
+}
+
+.btn-save-settings {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: #f0883a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-save-settings:hover {
+  background: #d9742e;
+}
+
+.btn-change-password {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: #6b58be;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-change-password:hover {
+  background: #5a4aa0;
+}
+
+.btn-delete-account {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: #e53e3e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-delete-account:hover {
+  background: #c53030;
+}
+
+/* ========== TOAST ========== */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+  z-index: 2000;
+}
+
+.toast {
+  background: #fff;
+  color: #1a1a1a;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  min-width: 240px;
+  max-width: 360px;
+  border-left: 4px solid transparent;
+  animation:
+    toastIn 0.3s ease,
+    toastOut 0.5s ease 2.5s forwards;
+}
+
+.toast--success {
+  border-left-color: #7dbf2e;
+}
+.toast--error {
+  border-left-color: #f44336;
+}
+.toast--info {
+  border-left-color: #6b58be;
+}
+
+@keyframes toastIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ========== Страница входа ========== */
+.login-wrapper {
+  min-height: 100vh;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 40px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-card__logo {
+  font-size: 24px;
+  font-weight: 500;
+  color: #2c2160;
+  margin-bottom: 32px;
+  letter-spacing: 0.3px;
+}
+.login-card__logo--accent {
+  color: #f0883a;
+}
+
+.login-card__tabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.login-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 8px 0;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #888;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.login-tab--active {
+  color: #f0883a;
+  border-bottom-color: #f0883a;
+}
+
+.login-form,
+.register-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.input-group {
+  position: relative;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 400;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease;
+  background: #fff;
+}
+
+.input-field:focus {
+  border-color: #f0883a;
+  box-shadow: 0 0 0 2px rgba(240, 136, 58, 0.2);
+}
+.input-field.input--error {
+  border-color: #e53e3e;
+}
+
+.input-group--password .input-field {
+  padding-right: 44px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #888;
+  padding: 4px;
+  line-height: 1;
+}
+
+.toggle-password:hover {
+  color: #333;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #ffffff;
+  background: #f0883a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s ease;
+  margin-top: 8px;
+}
+
+.btn-primary:hover {
+  background: #d9742e;
+}
+.btn-primary:active {
+  background: #c06524;
+}
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.btn-spinner {
+  display: inline-block;
+}
+
+.form-link {
+  text-align: center;
+  margin-top: 4px;
+}
+.forgot-password {
+  font-size: 13px;
+  color: #f0883a;
+  font-weight: 400;
+}
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.form-error {
+  color: #e53e3e;
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+/* ========== СТРАНИЦА КАЛИБРОВКИ ========== */
+.calibration-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0.5px 2px rgba(0,0,0,0.08);
+}
+
+.calibration-step {
+    display: none;
+}
+.calibration-step.active {
+    display: block;
+}
+
+.step-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+}
+
+/* Проверка оборудования */
+.hardware-check {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.hardware-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+.hardware-item i {
+    width: 20px;
+    text-align: center;
+}
+.hardware-item .status-icon {
+    font-size: 18px;
+}
+.status-ok { color: #7DBF2E; }
+.status-fail { color: #F44336; }
+.status-warn { color: #F0883A; }
+
+/* Точки калибровки */
+.calibration-dots {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: #f0f0f0;
+    border-radius: 12px;
+    margin: 16px 0;
+    overflow: hidden;
+}
+.calibration-dot {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: #F0883A;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.calibration-dot.completed {
+    background: #7DBF2E;
+}
+.calibration-dot.active {
+    box-shadow: 0 0 0 6px rgba(240, 136, 58, 0.3);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    margin: 12px 0;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: #F0883A;
+    transition: width 0.3s ease;
+}
+
+/* Проверка точности */
+.validation-point {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #6B58BE;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: background 0.3s;
+}
+.validation-point.collecting {
+    background: #F0883A;
+}
+
+/* Тепловая карта */
+.heatmap-canvas {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    margin: 16px auto;
+}
+
+/* Карточки результатов */
+.result-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+}
+.result-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 0.5px 2px rgba(0,0,0,0.08);
+}
+.result-card__label {
+    font-size: 12px;
+    color: #888;
+}
+.result-card__value {
+    font-size: 20px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-top: 4px;
+}
+.rating-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.rating-good { background: #e6f4e6; color: #2d6a2d; }
+.rating-medium { background: #fff3e0; color: #e65100; }
+.rating-bad { background: #fdecea; color: #b71c1c; }

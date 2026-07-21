@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insight</title>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="www/webgazer.js"></script>
+  
+</head>
+<body>
+  <!-- Боковая панель (Sidebar) — скрыта по умолчанию, показывается после входа -->
+  <aside class="sidebar" id="sidebar" style="display: none;">
+    <div class="sidebar__logo">In<span class="sidebar__logo--accent">sight</span></div>
+    <hr class="sidebar__divider">
+    <nav class="sidebar__nav">
+      <!-- Группа «Обзор» -->
+      <div class="nav-group">
+        <h3 class="nav-group__title">Обзор</h3>
+        <a href="#dashboard" class="nav-item" data-hash="dashboard">
+          <span class="nav-item__icon"><i class="fa-solid fa-chart-pie"></i></span>
+          <span class="nav-item__text">Дашборд</span>
+        </a>
+        <a href="#heatmap" class="nav-item" data-hash="heatmap">
+          <span class="nav-item__icon"><i class="fa-solid fa-fire"></i></span>
+          <span class="nav-item__text">Тепловые карты</span>
+        </a>
+        <a href="#segments" class="nav-item" data-hash="segments">
+          <span class="nav-item__icon"><i class="fa-solid fa-users"></i></span>
+          <span class="nav-item__text">Сегменты</span>
+        </a>
+        <a href="#calibration" class="nav-item" data-hash="calibration">
+          <span class="nav-item__icon"><i class="fa-solid fa-eye"></i></span>
+          <span class="nav-item__text">Калибровка</span>
+        </a>
+      </div>
+
+      <!-- Группа «Управление» -->
+      <div class="nav-group">
+        <h3 class="nav-group__title">Управление</h3>
+        <a href="#sites" class="nav-item" data-hash="sites">
+          <span class="nav-item__icon"><i class="fa-solid fa-globe"></i></span>
+          <span class="nav-item__text">Мои сайты</span>
+        </a>
+        <a href="#campaigns" class="nav-item" data-hash="campaigns">
+          <span class="nav-item__icon"><i class="fa-solid fa-bullhorn"></i></span>
+          <span class="nav-item__text">Кампании</span>
+        </a>
+        <a href="#export" class="nav-item" data-hash="export">
+          <span class="nav-item__icon"><i class="fa-solid fa-file-export"></i></span>
+          <span class="nav-item__text">Экспорт</span>
+        </a>
+      </div>
+
+      <!-- Группа «Аккаунт» -->
+      <div class="nav-group">
+        <h3 class="nav-group__title">Аккаунт</h3>
+        <a href="#settings" class="nav-item" data-hash="settings">
+          <span class="nav-item__icon"><i class="fa-solid fa-gear"></i></span>
+          <span class="nav-item__text">Настройки</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Профиль пользователя + кнопка выхода (прижаты к низу) -->
+    <div class="sidebar__footer">
+      <div class="sidebar__user">
+        <div class="sidebar__avatar" id="sidebarAvatar">
+          <i class="fa-solid fa-user-circle"></i>
+        </div>
+        <span class="sidebar__username">Наталья</span>
+      </div>
+      <button class="sidebar__logout" id="logoutBtn">Выйти</button>
+    </div>
+  </aside>
+
+  <!-- Основная область: topbar + контент (скрыта до входа) -->
+  <main class="main-area" id="mainArea" style="display: none;">
+    <header class="topbar">
+      <div class="topbar__info">
+        <h1 class="topbar__title" id="pageTitle">Дашборд</h1>
+        <p class="topbar__subtitle" id="pageSubtitle">Обзор активности</p>
+      </div>
+      <button class="topbar__action" id="pageAction">Действие</button>
+    </header>
+    <section class="content" id="contentArea">
+      <!-- Контент рендерится динамически -->
+    </section>
+  </main>
+
+  <!-- Страница входа -->
+  <div class="login-wrapper" id="loginWrapper" style="display: none;">
+    <div class="login-card">
+      <div class="login-card__logo">In<span class="login-card__logo--accent">sight</span></div>
+      <div class="login-card__tabs">
+        <button class="login-tab login-tab--active" data-tab="login">Вход</button>
+        <button class="login-tab" data-tab="register">Регистрация</button>
+      </div>
+      <form class="login-form" id="loginForm">
+        <div class="input-group">
+          <input type="email" class="input-field" id="loginEmail" placeholder="name@company.com" autocomplete="email">
+        </div>
+        <div class="input-group input-group--password">
+          <input type="password" class="input-field" id="loginPassword" placeholder="Пароль" autocomplete="current-password">
+          <button type="button" class="toggle-password" id="toggleLoginPassword"></button>
+        </div>
+        <button type="submit" class="btn-primary" id="loginSubmitBtn">
+          <span class="btn-text">Войти</span>
+          <span class="btn-spinner" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i></span>
+        </button>
+        <p class="form-link"><a href="#" class="forgot-password">Забыли пароль?</a></p>
+      </form>
+      <form class="register-form" id="registerForm" style="display: none;">
+        <div class="input-group">
+          <input type="text" class="input-field" id="regName" placeholder="Имя" autocomplete="name">
+        </div>
+        <div class="input-group">
+          <input type="email" class="input-field" id="regEmail" placeholder="Email" autocomplete="email">
+        </div>
+        <div class="input-group input-group--password">
+          <input type="password" class="input-field" id="regPassword" placeholder="Пароль" autocomplete="new-password">
+          <button type="button" class="toggle-password" id="toggleRegPassword"></button>
+        </div>
+        <button type="submit" class="btn-primary" id="registerSubmitBtn">
+          <span class="btn-text">Создать аккаунт</span>
+          <span class="btn-spinner" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i></span>
+        </button>
+      </form>
+      <div class="form-error" id="formError" style="display: none;">Неверный email или пароль</div>
+    </div>
+  </div>
+
+  <!-- Контейнер для модальных окон и тостов -->
+  <div id="modalContainer"></div>
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="script.js"></script>
+  <script src="js/metrics.js"></script>
+  <script src="js/heatmap.js"></script>
+  <script src="js/calibration.js"></script>
+</body>
+</html>
