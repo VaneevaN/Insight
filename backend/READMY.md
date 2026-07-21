@@ -92,6 +92,7 @@ Backend построен по многослойной архитектуре:
 - Node.js
 - Express.js
 - JavaScript (ES6+)
+- ChatGPT Images (OpenAI) (для генерации логотипа)
 
 ## Статус проекта
 
